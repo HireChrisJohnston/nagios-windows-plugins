@@ -1,7 +1,7 @@
 # nagios-windows-plugins
 Nagios Windows service and host plugins which include performance data for charts and capacity planning
 
-# check_host.ps1
+# [check_host.ps1](check_host.ps1)
 
 ## DESCRIPTION 
 No options exist and the plugin is used for monitoring Windows Servers running RDS. Performance data is output by default. Nagios
@@ -22,8 +22,9 @@ PS C:\foo> .\check_host.ps1
 	'%PrivilegedTime'=0.20% 
 	'%InterruptTime'=0.00% 
 	'%DPCTime'=0.00%
+---
 
-# check_win_cpu.ps1
+# [check_win_cpu.ps1](check_win_cpu.ps1)
 Nagios check plugin used for monitoring CPU usage sampling CPU Average, User Time, Privileged, Interrupt, DPC, CPU Queue,
 and Max CPU usage during the sample period. Output includes nagios performance data for charting and alerts
 	
@@ -67,4 +68,53 @@ PS C:\foo> .\check_win_cpu.ps1 -delay 1 -reps 5 -privwarn 50  -privcrit 75 -cpuw
 	'DPC_Time'=0.00%;50;75;0;100
 	'Max_Queue'=0;18;32;0;50
 
+---
 
+# [check_user_session_activity.ps1](check_user_session_activity.ps1)
+
+## Description
+
+Nagios check plugin used for monitoring user counts and group them by activity of active (5min or less), 15min, 30min, 45min and 45+min idle users.
+* Output includes Nagios performance data for charting.
+* Performance data is output by default.
+* No alerts occur with the plugin at this time. 
+
+It is used for performance charting and informational only.
+Perfect for layering in Nagios XI Graph Explorer
+
+Grouping of users by their idle status from Windows RDS (Remote Desktop Server) 
+which has a maximum inactivity value of 1 minute before being considered idle:
+
+* Working Users(Active) = Less than 4 min idle or in active status reported by RDS
+* 15min = 5-15min idle
+* 30min	= 16-30min idle
+* 45min = 31-45min idle
+* 45plus = more than 46min idle
+
+## Requires
+Remote Desktop Services to count the active users and group them by idle time.
+
+Outputs HTML so you must enable that Nagios option
+
+### Nagios XI
+Admin -> System Settings and check the "Allow HTML Tags in Host/Service Status" 
+
+### Nagios
+Set `escape_html_tags=0` in your cgi.cfg
+
+	
+## Example 
+
+PS C:\foo> .\check_user_session_activity.ps1
+	
+	Active Users 15min or under: 92 (37 Working)
+	<br />============================
+	<br />15min-30min Idle: 5
+	<br />30min-45min Idle: 3
+	<br />============================
+	<br />45min Plus Idle: 10|
+	'Under15min_Idle'=0;100;;;
+	'Working_Users'=0;;;;
+	'15_30min_Idle'=0;100;;;
+	'30_45min_Idle'=0;100;;;
+	'45min_Plus_Idle'=0;100;;;
