@@ -5,7 +5,7 @@
 	
 .DESCRIPTION 
 	
-    File Name  : checek_process.ps1 
+    File Name  : check_process.ps1 
     Author     : Chris Johnston - HireChrisJohnston@gmail.com
     Requires   : PowerShell V2
     
@@ -16,7 +16,7 @@
 .EXAMPLE 
 	PS C:\> .\check_process.ps1 -process '*notepad*'
 	
-	OK: Process Running contining *notepad* in the commandline
+	OK: Process Running containing *notepad* in the commandline
 
 	PS C:\> .\check_process.ps1 -process '*notepad'
 
@@ -31,7 +31,7 @@ $status_output
 
 		
 if($schedulerProcess.SessionID -gt 0) {
-	$status_output = "OK: Process Running contining $process in the commandline"
+	$status_output = "OK: Process Running containing $process in the commandline"
 	$returnCode = '0' 
 	}
 	else {
