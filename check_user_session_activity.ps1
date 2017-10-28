@@ -19,7 +19,7 @@
 		
     File Name  : check_user_session_activity.ps1 
     Author     : Chris Johnston - HireChrisJohnston@gmail.com
-    Requires   : PowerShell V2
+    Requires   : PowerShell V2 & Remote Desktop Services
 	License	   : MIT
     
 .REQUIRES
