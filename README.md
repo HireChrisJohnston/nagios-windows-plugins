@@ -120,3 +120,22 @@ PS C:\foo> .\check_user_session_activity.ps1
 	'45min_Plus_Idle'=0;100;;;
 
 ---
+
+# [check_process.ps1 ](check_process.ps1 )
+Checks for a running process, if not running it will retun as a WARNING alert for Nagios
+
+## Description
+    
+Specify the process using regular expressions knowing it uses where 'like' matching
+using the commandline switch. Even though the return code to Nagios will result as a WARNING, 
+the text output of the plugin indicates critical for cohersion of the operators to take action.
+
+Use regular expressions for the -process command line option.
+
+PS C:\> .\check_process.ps1 -process `'*notepad*'`
+	
+	OK: Process Running contining *notepad* in the commandline
+
+PS C:\> .\check_process.ps1 -process '*notepad'
+
+	CRITICAL: Process containing (*notepad) in the commandline is not running
