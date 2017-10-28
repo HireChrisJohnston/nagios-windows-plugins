@@ -17,26 +17,11 @@
 		45min				 	= 31-45min idle
 		45plus					= more than 46min idle
 		
-		
     File Name  : check_user_session_activity.ps1 
     Author     : Chris Johnston - HireChrisJohnston@gmail.com
     Requires   : PowerShell V2
 	License	   : MIT
     
-	Alerts occur based on performance data for Privileges and Total Processor Time
-	Includes charting the Maximum CPU samples observed over the collection of samples
-	to further enhance and provide detail to CPU utilization.
-	
-	Usage is calculated across all cores for total CPU usage.  Adjust the variables as needed for changing the sampling method
-	or thresholds from the default via command line
-	
-		-15warn 		Warning Threshold of 0-15min idle users (not used)
-		-30warn 		Warning Threshold of 15-30min idle users (not used)
-		-45warn 		Warning Threshold of 30-45min idle users (not used)
-		-45pluswarn 	Warning Threshold of 45min or more idle users (not used)
-		
-	Nagios Performance data example seen below and has been formatted for readability of the performance metrics.
-
 .REQUIRES
 	Remote Desktop Services to count the active users and group them by idle time 
 	Outputs HTML so you must enable that Nagios option
@@ -44,7 +29,6 @@
 	or 
 	set escape_html_tags=0 in your cgi.cfg
 
-	
 .EXAMPLE 
 	PS C:\foo> .\check_user_session_activity.ps1 -15warn 500 -30warn 500 -45warn 500 -45pluswarn 500
 	
